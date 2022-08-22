@@ -43,6 +43,7 @@ def get_words():
     return get_words()
   return words.json()['data']['text']
 
+#获取随机颜色
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
