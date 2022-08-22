@@ -35,7 +35,7 @@ def get_birthday():
   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")   #next(下一次生日：年-月-日)
   if next < datetime.now():                                                       #如果下一次生日时间小于今天，next(下一次生日）=下一年的生日
     next = next.replace(year=next.year + 1)
-  return (next - today).days + 1  #返回日期+1
+  return (next - today).days  #返回日期
 
 #获取语句
 def get_words():
