@@ -17,26 +17,29 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 template_id = os.environ["TEMPLATE_ID"]
 
-
+#获取今日天气weather，high温度，low温度
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
-  weather = res['data']['list'][0]
-  return weather['weather'], math.floor(weather['temp'])
+  weather = res['data']['list'][0]    #[0]返回的是今日天气  明天[1]
+  return weather['weather'], math.floor(weather['high']), math.floor(weather['low'])     #return weather['weather'], math.floor(weather['temp'])
 
+#计算在一起时间
 def get_count():
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
+  delta = today - datetime.strptime(start_date, "%Y-%m-%d") + 1  #delta=今天datetime.now()-开始时间  strptime把时间字符串解析为时间元组
   return delta.days
 
+#计算生日
 def get_birthday():
-  next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
-  if next < datetime.now():
+  next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")   #next(下一次生日：年-月-日)
+  if next < datetime.now():                                                       #如果下一次生日时间小于今天，next(下一次生日）=下一年的生日
     next = next.replace(year=next.year + 1)
-  return (next - today).days
+  return (next - today).days + 1  #返回日期+1
 
+#获取语句
 def get_words():
   words = requests.get("https://api.shadiao.pro/chp")
-  if words.status_code != 200:
+  if words.status_code != 200:   #status_code表示服务器的响应状态，如200代表服务器正常响应
     return get_words()
   return words.json()['data']['text']
 
