@@ -7,7 +7,7 @@ import os
 import random
 
 today = datetime.now()
-riqi = datetime.date.today  #新添加
+riqi = datetime.now().date()  #新添加
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
