@@ -7,6 +7,7 @@ import os
 import random
 
 today = datetime.now()
+riqi = datetime.date.today  #新添加
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
@@ -48,10 +49,21 @@ def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
 
+
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-wea, temperature = get_weather()
-data = {"weather":{"value":wea},"temperature":{"value":temperature},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+wea, temperature_high, temperature_low = get_weather()
+data = {"riqi":{"value":riqi},"weather":{"value":wea},"temperature_high":{"value":temperature_high},"temperature_low":{"value":temperature_low},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+#weather天气，temperature_high今日最高温度，temperature_low今日最低温度，love_days在一起的时间，birthday_left距离阳历生日时间
 res = wm.send_template(user_id, template_id, data)
 print(res)
+
+#善良美丽贴心的皮皮哈尼你好呀
+#今天是{{riqi.DATA}} 
+#今日天气：{{weather.DATA}} 
+#今日温度：{{temperature_high.DATA}} /{{temperature_low.DATA}} 
+#今天是我们相爱的的第{{love_days.DATA}}天 
+#距离你的阳历生日还有{{birthday_left.DATA}}天
+
+#{{words.DATA}}
