@@ -27,7 +27,7 @@ def get_weather():
 
 #计算在一起时间
 def get_count():
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d") + 1  #delta=今天datetime.now()-开始时间  strptime把时间字符串解析为时间元组
+  delta = today - datetime.strptime(start_date, "%Y-%m-%d")   #delta=今天datetime.now()-开始时间  strptime把时间字符串解析为时间元组
   return delta.days
 
 #计算生日
