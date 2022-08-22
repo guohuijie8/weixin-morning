@@ -22,7 +22,7 @@ def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
   weather = res['data']['list'][0]    #[0]返回的是今日天气  明天[1]
-  return weather['weather'], math.floor(weather['high']), math.floor(weather['low']), date['date'],     #return weather['weather'], math.floor(weather['temp'])
+  return weather['weather'], math.floor(weather['high']), math.floor(weather['low']), date['date']    #return weather['weather'], math.floor(weather['temp'])
 
 #计算在一起时间
 def get_count():
