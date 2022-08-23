@@ -22,7 +22,7 @@ def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
   weather = res['data']['list'][0]    #[0]返回的是今日天气  明天[1]
-  return weather['weather'], math.floor(weather['high']), math.floor(weather['low']), weather['date']    #return weather['weather'], math.floor(weather['temp'])
+  return weather['weather'], math.floor(weather['high']), math.floor(weather['low'])  # , weather['date']    #return weather['weather'], math.floor(weather['temp'])
 
 #计算在一起时间
 def get_count():
@@ -52,9 +52,10 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-wea, temperature_high, temperature_low, date = get_weather()
-data = {"date":{"value":date},"weather":{"value":wea},"temperature_high":{"value":temperature_high},"temperature_low":{"value":temperature_low},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+wea, temperature_high, temperature_low = get_weather()
+data = {"weather":{"value":wea},"temperature_high":{"value":temperature_high},"temperature_low":{"value":temperature_low},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
 #weather天气，temperature_high今日最高温度，temperature_low今日最低温度，love_days在一起的时间，birthday_left距离阳历生日时间
+#"date":{"value":date},
 res = wm.send_template(user_id, template_id, data)
 print(res)
 
