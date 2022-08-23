@@ -1,4 +1,5 @@
-from datetime import date, datetime
+import datetime
+#from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
 from wechatpy.client.api import WeChatMessage, WeChatTemplate
@@ -10,6 +11,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
+date_today=datetime.now()
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -60,9 +62,9 @@ res = wm.send_template(user_id, template_id, data)
 print(res)
 
 #善良美丽贴心的皮皮哈尼你好呀
-#今天是{{riqi.DATA}} 
+#今天是{{date_today.DATA}} 
 #今日天气：{{weather.DATA}} 
-#今日温度：{{temperature_high.DATA}} /{{temperature_low.DATA}} 
+#今日温度：{{temperature_high.DATA}} ℃/{{temperature_low.DATA}} ℃
 #今天是我们相爱的的第{{love_days.DATA}}天 
 #距离你的阳历生日还有{{birthday_left.DATA}}天
 
