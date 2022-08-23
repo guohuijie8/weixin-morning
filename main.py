@@ -1,5 +1,5 @@
-import datetime
-#from datetime import date, datetime
+#import datetime
+from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
 from wechatpy.client.api import WeChatMessage, WeChatTemplate
@@ -11,7 +11,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
-date_today=datetime.now()
+#date_today=datetime.now()
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -24,7 +24,7 @@ def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
   weather = res['data']['list'][0]    #[0]返回的是今日天气  明天[1]
-  return weather['weather'], math.floor(weather['high']), math.floor(weather['low'])  # , weather['date']    #return weather['weather'], math.floor(weather['temp'])
+  return weather['weather'], math.floor(weather['high']), math.floor(weather['low'])  #  weather['date']    #return weather['weather'], math.floor(weather['temp'])
 
 #计算在一起时间
 def get_count():
